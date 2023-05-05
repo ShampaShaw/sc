@@ -10,6 +10,7 @@ export const client =  createClient({
     ignoreBrowserTokenWarning: true,
 })
 
-const builder = imageUrlBuilder(client);
-
-export const urlFor = (source) => builder.image(source);
+const builder= imageUrlBuilder(client)
+export function urlFor(source) {
+return builder.image(source)
+}
