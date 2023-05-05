@@ -35,7 +35,7 @@ const Home = () => {
   },[])
   
   return (
-    <div className='flex bg-gray-50 md:flex-row flex-col h-screen transition-height duration-75 ease-out'>
+    <div className='flex bg-gray-50 md:flex-row flex-col h-screen transaction-height duration-75 ease-out'>
       <div className='hidden md:flex h-screen flex-initial'>
         <Sidebar user={user && user} />
       </div>
