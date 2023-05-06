@@ -10,6 +10,7 @@ import { userQuery } from '../utils/data'
 import { client } from '../client'
 import Pins from './Pins'
 import logo from '../assets/logo.png'
+import { fetchUser } from '../utils/fetchUser'
 
 
 const Home = () => {
@@ -18,7 +19,7 @@ const Home = () => {
   const [user, setUser] = useState()
   const scrollRef = useRef(null)
 
-  const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')): localStorage.clear()
+  const userInfo = fetchUser()
 
   useEffect(() => {
     const query = userQuery(userInfo?.googleId)
@@ -45,8 +46,8 @@ const Home = () => {
         <Link to="/">
           <img src={logo} alt='logo' className='w-28' />
         </Link>
-        <Link to={`user-profile/${user?._id}`}>
-          <img src={user?.image} alt='logo' className='w-28' />
+        <Link >
+          <img src={user?.image} alt='user-pic' className='w-9 h-9 rounded-full' />
         </Link>
         </div>
         {toggleSidebar && (
@@ -60,7 +61,7 @@ const Home = () => {
       </div>
       <div className='pb-2 flex-1 h-screen overflow-y-scroll' ref={scrollRef}>
         <Routes>
-          <Route path='/user-profile/:userId' element={<UserProfile /> } />
+          <Route path="/user-profile/:userId" element={<UserProfile /> } />
           <Route path='/*' element={<Pins user={user && user} /> } />
         </Routes>
       </div>
