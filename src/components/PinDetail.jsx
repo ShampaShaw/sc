@@ -64,6 +64,7 @@ const PinDetail = ({ user }) => {
   if(!pinDetail) return <Spinner message='Loading Pin...' />
   
   return (
+    <>
     <div className='flex  xl-flex-row flex-col m-auto bg-white' style={{ maxWidth: '500px', borderRadius:'32px'}}>
         <div className='flex justify-center items-center md:items-start flex-initial'>
           <img 
@@ -143,6 +144,17 @@ const PinDetail = ({ user }) => {
         </div>
         </div>
     </div>
+    {pins != null && pins.length > 0 ? (
+      <>
+        <h2 className='text-center font-bold text-2xl mt-8 mb-4'>
+          More like this
+        </h2>
+        <MasonaryLayout pins={pins} />
+      </>
+    ) : (
+      <Spinner message='Loading for pins...' />
+    )}
+    </>
   )
 }  
 
