@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import { AiOutlineCloudUpload } from 'react-icons/ai'
-import { MdDelete } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
+import { MdDelete } from 'react-icons/md'
 
+import { categories } from '../utils/data'
 import { client } from '../client'
 import Spinner from './Spinner'
-import { categories } from '../utils/data'
-
 const CreatePin = ({ user }) => {
 
   const [title, setTitle] = useState('')
@@ -70,7 +69,7 @@ const CreatePin = ({ user }) => {
     } else {
       setFields(true)
 
-      setTimeout(() => setFields(false), 2000)
+      setTimeout(() => setFields(false),)
     }
   }
 
