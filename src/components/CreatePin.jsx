@@ -157,12 +157,18 @@ const CreatePin = ({ user }) => {
                   className='outline-none w-4/5 text-base border-b-2 border-gray-500 p-2 rounded-md cursor-pointer'
                 >
                   <option value='other' className='bg-white'>Select Category</option>
-
-                  {categories.map((category) => (
-                    <option className='text-base border-0 outline-none capitalize bg-white text-black' value={category.name}>
+                  {categories
+                  .sort((a, b) => a.name.localeCompare(b.name)) // Sort categories alphabetically
+                  .map((category) => (
+                    <option 
+                      key={category.name} // Adding a key to each option is good practice
+                      className='text-base border-0 outline-none capitalize bg-white text-black' 
+                      value={category.name}
+                    >
                       {category.name}
                     </option>
-                  ))}
+                  ))
+                }
                 </select>
               </div>
                 <div className='flex justify-end items-end mt-5'>

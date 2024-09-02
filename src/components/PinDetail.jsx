@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { MdDownloadForOffline } from 'react-icons/md'
 import { Link, useParams } from 'react-router-dom'
-import { v4 as uuidv4} from 'uuid'
+import { v4 as uuidv4} from 'uuid'       //uuidv4 is imported from the uuid so that the unique id can be generated
 
-import { client, urlFor } from '../client'
-import MasonaryLayout from './MasonaryLayout'
-import { pinDetailQuery, pinDetailMorePinQuery } from '../utils/data'
+import { client, urlFor } from '../client'    //client and urlFor is imported from the client file so that the data can be fetched from the sanity studio and the url can be generated
+import MasonaryLayout from './MasonaryLayout'    //Masonary layout is imported from the MasonaryLayout component so that the pins can be displayed in the masonary layout
+import { pinDetailQuery, pinDetailMorePinQuery } from '../utils/data'     //pinDetailQuery and pinDetailMorePinQuery are imported from the data file so that the query can be created to fetch the data from the sanity studio
 import Spinner from './Spinner'
 
 const PinDetail = ({ user }) => {
@@ -15,30 +15,30 @@ const PinDetail = ({ user }) => {
   const [addingComment, setAddingComment] = useState(false)
   const { pinId } = useParams()
 
-  const addComment = () => {
-    if(comment) {
-      setAddingComment(true);
+  const addComment = () => {     //function that is called when the comment is added
+    if(comment) {                //if the comment is present then the comment is added
+      setAddingComment(true);    //setAddingComment is set to true so that the comment can be added
 
-      client
-        .patch(pinId)
-        .setIfMissing({ comments: []})
-        .insert('after', 'comments[-1]', [{
-          comment,
+      client                   //client is used to fetch the data from the sanity studio
+        .patch(pinId)          //patch is used to update the data in the sanity studio
+        .setIfMissing({ comments: []})     //setIfMissing is used to set the comments if the comments are missing
+        .insert('after', 'comments[-1]', [{      //insert is used to insert the comment in the comments array
+          comment,              
           _key: uuidv4(),
           postedBy: {
             _type: 'postedBy',
             _ref: user._id
           }
-        }])
-        .commit()
-        .then(() => {
-          fetchPinDetails()
-          setComment('')
-          setAddingComment(false)
+        }])      
+        .commit()          //commit is used to commit the changes that are made in the sanity studio
+        .then(() => {      //promise that is returned when the comment is added in the sanity studio
+          fetchPinDetails()    //fetchPinDetails is called so that the pin details can be fetched
+          setComment('')        //comment is set to empty so that the comment can be added
+          setAddingComment(false)    //setAddingComment is set to false so that the comment can be added
         })
     }
   }
-  const fetchPinDetails = () => {
+  const fetchPinDetails = () => {       //
     let query = pinDetailQuery(pinId)
 
     if(query) {

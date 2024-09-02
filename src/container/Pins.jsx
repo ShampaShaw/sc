@@ -3,7 +3,7 @@ import {Routes, Route} from 'react-router-dom'
 
 import {Feed, CreatePin, Navbar, PinDetail, Search } from '../components'
 
-const Pins = ({ user }) => {
+const Pins = ({ user }) => {       //only if the user present get all the pins
 
   const [searchTerm, setSearchTerm] = useState('')
   return (
@@ -13,7 +13,7 @@ const Pins = ({ user }) => {
         </div>
         <div className='h-full'>
           <Routes>
-            <Route path='/' element={<Feed />} />
+            <Route path='/' element={<Feed />} />          
             <Route path='/category/:categoryId' element={<Feed />} />
             <Route path='/pin-detail/:pinId' element={<PinDetail user={user} />} />
             <Route path='/create-pin' element={<CreatePin user={user} />} />
