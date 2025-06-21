@@ -69,7 +69,7 @@ const CreatePin = ({ user }) => {
     } else {
       setFields(true)
 
-      setTimeout(() => setFields(false),)
+      setTimeout(() => setFields(false),2000)
     }
   }
 
